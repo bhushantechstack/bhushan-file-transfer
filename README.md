@@ -15,3 +15,6 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 ## Useful git commands
 *`git branch -m old-branch new-branch`  command to rename branch
+
+## Error resolution
+*`refusing to merge unrelated histories` use *`git pull --allow-unrelated-histories`
