@@ -1,16 +1,14 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { S3Stack } from '../utils/S3Stack';
+import { FileTransferCmkSecretS3Stack } from './file-transfer-cmk-secret-s3-stack';
 
 export class FileTransferStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'FileTransferQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    const fileTransferCmkSecretS3Stack = new FileTransferCmkSecretS3Stack(this,"FileTransferCmkSecretS3Stack",{
+      environment: "us-east-1"
+    });
   }
 }
