@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { S3Stack } from '../utils/S3Stack';
+
 import { FileTransferCmkSecretS3Stack } from './file-transfer-cmk-secret-s3-stack';
 
 export class FileTransferStack extends cdk.Stack {

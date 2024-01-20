@@ -1,5 +1,5 @@
-export const FileTransferConfig = {
-    bucket:{
+export const Config = {
+    bucket: {
         essentialBucket: "essential-bucket"
     }
-}
+};
