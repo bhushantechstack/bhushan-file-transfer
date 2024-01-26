@@ -12,8 +12,8 @@ export class FileTransferCmkSecretS3Stack extends cdk.Stack {
     super(scope, id, props);
 
 
-    const essentialBucket = new S3Stack(this,Config.bucket.essentialBucket,{
-      bucketName: Config.bucket.essentialBucket
+    const essentialBucket = new S3Stack(this,"essential-bucket",{
+      bucketName: "essential-bucket"
     })
   }
 }
