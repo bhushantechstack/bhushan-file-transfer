@@ -14,5 +14,7 @@ export class FileTransferStack extends cdk.Stack {
     // const fileTransferCmkSecretS3Stack = new FileTransferCmkSecretS3Stack(this,"FileTransferCmkSecretS3Stack",{
     //   environment: "us-east-1"
     // });
+
+    //this is testing if this bucket give already exit or not things
   }
 }
