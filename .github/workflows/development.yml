@@ -38,8 +38,6 @@ jobs:
       - name: Deploy to AWS
         run: |
           cdk synth FileTransferStack 
-          cdk bootstrap --force
+          cdk bootstrap aws://${{ secrets.AWS_ACCOUNT_NUMBER }}/us-east-1
           cdk deploy FileTransferStack 
-          cdk synth FileTransferCmkSecretS3Stack 
-          cdk bootstrap --force
-          cdk deploy FileTransferCmkSecretS3Stack 
+ 
