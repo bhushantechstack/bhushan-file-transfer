@@ -4,7 +4,7 @@ import { S3Stack } from '../utils/S3Stack';
 import { fileConfig } from '../utils/fileConfig';
 
 
-interface FileTransferCmkSecretS3StackProps extends cdk.StackProps{
+export interface FileTransferCmkSecretS3StackProps extends cdk.StackProps{
     envVariable:string
 }
 export class FileTransferCmkSecretS3Stack extends cdk.Stack {
