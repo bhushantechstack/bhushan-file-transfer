@@ -9,17 +9,19 @@ export class FileTransferStack extends cdk.Stack {
 
     const essentialBucket = new cdk.aws_s3.Bucket(
       this,
-      fileConfig.bucket.essentialBucket,
+      fileConfig.bucket.essentialBucket + this.envVariable,
       {
         bucketName: fileConfig.bucket.essentialBucket + this.envVariable,
+        versioned:true
       }
     );
 
     const dataBucket = new cdk.aws_s3.Bucket(
       this,
-      fileConfig.bucket.dataBucket,
+      fileConfig.bucket.dataBucket + this.envVariable,
       {
         bucketName: fileConfig.bucket.dataBucket + this.envVariable,
+        versioned:true
       }
     );
   }
