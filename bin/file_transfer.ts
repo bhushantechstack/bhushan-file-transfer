@@ -6,5 +6,4 @@ import { FileTransferCmkSecretS3Stack } from '../lib/file-transfer-cmk-secret-s3
 
 const app = new cdk.App();
 new FileTransferStack(app, 'FileTransferStack', {
-  envVariable:"dev"
 });
