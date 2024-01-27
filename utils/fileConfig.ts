@@ -1,6 +1,6 @@
 export const fileConfig = {
     bucket: {
-        essentialBucket: "essential-bucket-",
-        dataBucket: "data-bucket-"
+        essentialBucket:"input-bucket-",
+        dataBucket: "output-bucket-"
     }
 };
