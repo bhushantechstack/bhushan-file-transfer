@@ -36,7 +36,7 @@ export class FileTransferStack extends cdk.Stack {
       {
         command: {
           name: fileConfig.glue.jobName + this.envVariable,
-          pythonVersion: "3_9",
+          pythonVersion: "3.9",
           scriptLocation: "../utils/glue-script/lambda-script.py",
         },
         role: essentialBucket.bucketArn,
