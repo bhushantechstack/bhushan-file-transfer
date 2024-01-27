@@ -19,8 +19,7 @@ export class FileTransferStack extends cdk.Stack {
       
       }
     );
-    essentialBucket.grantReadWrite
-    essentialBucket._enableCrossEnvironment
+    
     
     new cdk.aws_s3_deployment.BucketDeployment(this, 'GlueScriptDeployment', {
       sources: [cdk.aws_s3_deployment.Source.asset("utils/glue-script/")],
@@ -55,6 +54,7 @@ export class FileTransferStack extends cdk.Stack {
         
       }
     );
-    
+    essentialBucket.grantReadWrite
+    essentialBucket._enableCrossEnvironment
   }
 }
