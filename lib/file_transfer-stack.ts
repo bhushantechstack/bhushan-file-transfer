@@ -7,13 +7,13 @@ export class FileTransferStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    new cdk.aws_s3.Bucket(this,"bhushang-bucket",{
-      bucketName:"bhushang-bucket-dev",
+    // new cdk.aws_s3.Bucket(this,"bhushang-bucket",{
+    //   bucketName:"bhushang-bucket-dev",
       
-    })
-    // const fileTransferCmkSecretS3Stack = new FileTransferCmkSecretS3Stack(this,"FileTransferCmkSecretS3Stack",{
-    //   environment: "us-east-1"
-    // });
+    // })
+    new FileTransferCmkSecretS3Stack(this,"file-transfer-stack",{
+      environment: "dev"
+    });
 
     //this is testing if this bucket give already exit or not things
   }

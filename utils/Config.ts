@@ -1,5 +1,6 @@
-export const Config = {
+export const fileConfig = {
     bucket: {
-        essentialBucket: "essential-bucket"
+        resourceId:"essential-bucket-",
+        essentialBucket: "essential-bucket-"
     }
 };
