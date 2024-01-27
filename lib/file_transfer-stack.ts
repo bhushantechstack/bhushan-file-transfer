@@ -20,11 +20,18 @@ export class FileTransferStack extends cdk.Stack {
       }
     );
     
-    
+    //glue script deployment
     new cdk.aws_s3_deployment.BucketDeployment(this, 'GlueScriptDeployment', {
       sources: [cdk.aws_s3_deployment.Source.asset("utils/glue-script/")],
       destinationBucket: veryInputBucket,
       destinationKeyPrefix: 'scripts', // Destination folder in the S3 bucket
+    });
+    
+    //lambda script deployment
+    new cdk.aws_s3_deployment.BucketDeployment(this, 'LambdaScriptDeployment', {
+      sources: [cdk.aws_s3_deployment.Source.asset("utils/lambda/")],
+      destinationBucket: veryInputBucket,
+      destinationKeyPrefix: 'lambda-scripts', // Destination folder in the S3 bucket
     });
 
     // data bucket
@@ -60,7 +67,7 @@ export class FileTransferStack extends cdk.Stack {
       functionName:fileConfig.lambda.functionName,
       runtime: cdk.aws_lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
-      code: cdk.aws_lambda.Code.fromAsset(path.join(__dirname, 'lambda-handler')),
+      code: cdk.aws_lambda.Code.fromAsset(path.join(__dirname, "s3://"+fileConfig.bucket.essentialBucket+this.envVariable+"/lambda-scripts/index.py")),
     });
 
   }
