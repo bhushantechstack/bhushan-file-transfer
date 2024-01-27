@@ -12,7 +12,7 @@ export class FileTransferCmkSecretS3Stack extends cdk.Stack {
     super(scope, id, props);
     const envVariable=props.envVariable
 
-    const essentialBucket = new  S3Stack(this,fileConfig.bucket.resourceId+envVariable,{
+    const essentialBucket = new S3Stack(this,fileConfig.bucket.resourceId+envVariable,{
       bucketName: fileConfig.bucket.essentialBucket+envVariable
     })
   }
