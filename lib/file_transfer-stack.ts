@@ -15,11 +15,11 @@ export class FileTransferStack extends cdk.Stack {
       }
     );
 
-    const assetBucket = new cdk.aws_s3.Bucket(
+    const dataBucket = new cdk.aws_s3.Bucket(
       this,
-      fileConfig.bucket.assetBucket + this.envVariable,
+      fileConfig.bucket.dataBucket + this.envVariable,
       {
-        bucketName: fileConfig.bucket.assetBucket + this.envVariable,
+        bucketName: fileConfig.bucket.dataBucket + this.envVariable,
       }
     );
   }
