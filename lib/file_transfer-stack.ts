@@ -1,8 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
-import { FileTransferCmkSecretS3Stack } from './file-transfer-cmk-secret-s3-stack';
-
 export class FileTransferStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -11,9 +9,6 @@ export class FileTransferStack extends cdk.Stack {
     //   bucketName:"bhushang-bucket-dev",
       
     // })
-    new FileTransferCmkSecretS3Stack(this,"file-transfer-stack",{
-      envVariable: "dev"
-    });
 
     //this is testing if this bucket give already exit or not things
   }
