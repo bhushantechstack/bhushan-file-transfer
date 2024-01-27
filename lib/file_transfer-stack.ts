@@ -11,7 +11,7 @@ export class FileTransferStack extends cdk.Stack {
     super(scope, id, props);
     const envVariable=props.envVariable;
 
-    const essentialBucket = new S3Stack(this,"abc",{
+    new S3Stack(this,"abc",{
       bucketName: "abc-dev"
     })
   }
