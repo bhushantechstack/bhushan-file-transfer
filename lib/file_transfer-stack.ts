@@ -3,7 +3,7 @@ import { Construct } from "constructs";
 import { fileConfig } from "../utils/fileConfig";
 import { aws_glue } from "aws-cdk-lib";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
-import { Role } from "aws-cdk-lib/aws-iam";
+
 export class FileTransferStack extends cdk.Stack {
   envVariable: string;
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -16,8 +16,17 @@ export class FileTransferStack extends cdk.Stack {
       {
         bucketName: fileConfig.bucket.essentialBucket + this.envVariable,
         versioned: true,
+      
       }
     );
+    essentialBucket.grantReadWrite
+    essentialBucket._enableCrossEnvironment
+    
+    new cdk.aws_s3_deployment.BucketDeployment(this, 'GlueScriptDeployment', {
+      sources: [cdk.aws_s3_deployment.Source.asset("utils/glue-script/")],
+      destinationBucket: essentialBucket,
+      destinationKeyPrefix: 'scripts', // Destination folder in the S3 bucket
+    });
 
     // data bucket
     const dataBucket = new cdk.aws_s3.Bucket(
@@ -36,14 +45,16 @@ export class FileTransferStack extends cdk.Stack {
       {
         command: {
           name: "glueetl",
-          scriptLocation: "../utils/glue-script/lambda-script.py",
+          scriptLocation: `s3://${essentialBucket}/scripts/lambda-script.py`,
         },
         role: essentialBucket.bucketArn,
         description: fileConfig.glue.description,
         glueVersion: "4.0",
         numberOfWorkers: 299,
         workerType: "G.1X",
+        
       }
     );
+    
   }
 }
