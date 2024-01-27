@@ -3,6 +3,7 @@ import { Construct } from "constructs";
 import { fileConfig } from "../utils/fileConfig";
 import { aws_glue } from "aws-cdk-lib";
 import path = require("path");
+import { LambdaApplication } from "aws-cdk-lib/aws-codedeploy";
 
 export class FileTransferStack extends cdk.Stack {
   envVariable: string;
@@ -16,22 +17,21 @@ export class FileTransferStack extends cdk.Stack {
       {
         bucketName: fileConfig.bucket.essentialBucket + this.envVariable,
         versioned: true,
-      
       }
     );
-    
+
     //glue script deployment
-    new cdk.aws_s3_deployment.BucketDeployment(this, 'GlueScriptDeployment', {
+    new cdk.aws_s3_deployment.BucketDeployment(this, "GlueScriptDeployment", {
       sources: [cdk.aws_s3_deployment.Source.asset("utils/glue-script/")],
       destinationBucket: veryInputBucket,
-      destinationKeyPrefix: 'scripts', // Destination folder in the S3 bucket
+      destinationKeyPrefix: "scripts", // Destination folder in the S3 bucket
     });
-    
+
     //lambda script deployment
-    new cdk.aws_s3_deployment.BucketDeployment(this, 'LambdaScriptDeployment', {
+    new cdk.aws_s3_deployment.BucketDeployment(this, "LambdaScriptDeployment", {
       sources: [cdk.aws_s3_deployment.Source.asset("utils/lambda/")],
       destinationBucket: veryInputBucket,
-      destinationKeyPrefix: 'lambda-scripts', // Destination folder in the S3 bucket
+      destinationKeyPrefix: "lambda-scripts", // Destination folder in the S3 bucket
     });
 
     // data bucket
@@ -51,24 +51,35 @@ export class FileTransferStack extends cdk.Stack {
       {
         command: {
           name: "glueetl",
-          scriptLocation: "s3://"+fileConfig.bucket.essentialBucket+this.envVariable+"/scripts/lambda-script.py",
+          scriptLocation:
+            "s3://" +
+            fileConfig.bucket.essentialBucket +
+            this.envVariable +
+            "/scripts/lambda-script.py",
         },
         role: veryInputBucket.bucketArn,
         description: fileConfig.glue.description,
         glueVersion: "4.0",
         numberOfWorkers: 299,
         workerType: "G.1X",
-        
       }
     );
 
     //adding lambda to test sns topic
-    new cdk.aws_lambda.Function(this, 'Function', {
-      functionName:fileConfig.lambda.functionName,
+    const sns_invoke = new cdk.aws_lambda.Function(this, "Function", {
+      functionName: fileConfig.lambda.functionName,
       runtime: cdk.aws_lambda.Runtime.NODEJS_18_X,
-      handler: 'index.handler',
+      handler: "index.handler",
       code: cdk.aws_lambda.Code.fromAsset("utils/lambda/"),
     });
 
+    //ssn to send notifications
+
+    const sns = new cdk.aws_sns.CfnTopic(this, "Your-topc", {
+      topicName: fileConfig.sns.topic,
+      displayName: fileConfig.sns.topic,
+    });
+
+    
   }
 }

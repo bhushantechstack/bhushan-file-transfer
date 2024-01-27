@@ -9,5 +9,8 @@ export const fileConfig = {
     },
     lambda:{
         functionName:"invoke-sns-function"
+    },
+    sns:{
+        topic:"your-topic"
     }
 };
