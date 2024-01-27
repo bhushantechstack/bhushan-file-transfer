@@ -2,7 +2,7 @@ import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import { fileConfig } from "../utils/fileConfig";
 import { aws_glue } from "aws-cdk-lib";
-import { Runtime } from "aws-cdk-lib/aws-lambda";
+import path = require("path");
 
 export class FileTransferStack extends cdk.Stack {
   envVariable: string;
@@ -54,6 +54,14 @@ export class FileTransferStack extends cdk.Stack {
         
       }
     );
+
+    //adding lambda to test sns topic
+    new cdk.aws_lambda.Function(this, 'Function', {
+      functionName:fileConfig.lambda.functionName,
+      runtime: cdk.aws_lambda.Runtime.NODEJS_18_X,
+      handler: 'index.handler',
+      code: cdk.aws_lambda.Code.fromAsset(path.join(__dirname, 'lambda-handler')),
+    });
 
   }
 }

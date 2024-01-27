@@ -6,5 +6,8 @@ export const fileConfig = {
     glue: {
         jobName: "script-to-run-",
         description:"this is test job-"
+    },
+    lambda:{
+        functionName:"invoke-sns-function"
     }
 };
