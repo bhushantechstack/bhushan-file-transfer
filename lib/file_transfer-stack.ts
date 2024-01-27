@@ -54,7 +54,6 @@ export class FileTransferStack extends cdk.Stack {
         
       }
     );
-    essentialBucket.grantReadWrite
-    essentialBucket._enableCrossEnvironment
+
   }
 }
