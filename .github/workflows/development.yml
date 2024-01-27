@@ -40,3 +40,9 @@ jobs:
           cdk synth FileTransferStack FileTransferCmkSecretS3Stack
           cdk bootstrap aws://${{ secrets.AWS_ACCOUNT_NUMBER }}/us-east-1
           cdk deploy FileTransferStack FileTransferCmkSecretS3Stack
+
+      - name: File transfer bucket stack
+        run: |
+          cdk synth FileTransferCmkSecretS3Stack
+          cdk bootstrap aws://${{ secrets.AWS_ACCOUNT_NUMBER }}/us-east-1
+          cdk deploy FileTransferCmkSecretS3Stack
