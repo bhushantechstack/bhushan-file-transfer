@@ -12,7 +12,7 @@ export class FileTransferStack extends cdk.Stack {
       
     // })
     new FileTransferCmkSecretS3Stack(this,"file-transfer-stack",{
-      environment: "dev"
+      envVariable: "dev"
     });
 
     //this is testing if this bucket give already exit or not things

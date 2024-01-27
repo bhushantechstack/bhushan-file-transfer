@@ -5,15 +5,15 @@ import { fileConfig } from '../utils/fileConfig';
 
 
 interface FileTransferCmkSecretS3StackProps extends cdk.StackProps{
-    environment:string
+    envVariable:string
 }
 export class FileTransferCmkSecretS3Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: FileTransferCmkSecretS3StackProps) {
     super(scope, id, props);
-    const env=this.environment
+    const envVariable=props.envVariable
 
-    const essentialBucket = new  S3Stack(this,fileConfig.bucket.resourceId+env,{
-      bucketName: fileConfig.bucket.essentialBucket+env
+    const essentialBucket = new  S3Stack(this,fileConfig.bucket.resourceId+envVariable,{
+      bucketName: fileConfig.bucket.essentialBucket+envVariable
     })
   }
 }
