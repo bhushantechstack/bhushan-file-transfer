@@ -37,6 +37,6 @@ jobs:
           aws-region: "us-east-1"
       - name: Deploy to AWS
         run: |
-          cdk synth FileTransferStack
+          cdk synth FileTransferStack FileTransferCmkSecretS3Stack
           cdk bootstrap aws://${{ secrets.AWS_ACCOUNT_NUMBER }}/us-east-1
-          cdk deploy FileTransferStack
+          cdk deploy FileTransferStack FileTransferCmkSecretS3Stack
