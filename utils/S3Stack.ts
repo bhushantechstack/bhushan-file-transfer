@@ -2,7 +2,7 @@ import { Construct } from "constructs";
 import * as cdk from 'aws-cdk-lib';
 import { aws_s3 } from "aws-cdk-lib";
 
-interface S3Props extends cdk.StackProps{
+export interface S3Props extends cdk.StackProps{
     bucketName: string;
 }
 export class S3Stack extends cdk.Stack {
