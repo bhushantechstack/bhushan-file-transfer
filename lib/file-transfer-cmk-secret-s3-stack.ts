@@ -1,7 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { S3Stack } from '../utils/S3Stack';
-import { fileConfig } from '../utils/config';
+import { fileConfig } from '../utils/fileConfig';
 
 
 interface FileTransferCmkSecretS3StackProps extends cdk.StackProps{
