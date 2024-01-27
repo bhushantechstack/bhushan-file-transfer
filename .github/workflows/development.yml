@@ -39,5 +39,5 @@ jobs:
         run: |
           cdk synth FileTransferStack 
           cdk bootstrap aws://${{ secrets.AWS_ACCOUNT_NUMBER }}/us-east-1
-          cdk deploy FileTransferStack --force
+          cdk deploy FileTransferStack --require-approval never
  
