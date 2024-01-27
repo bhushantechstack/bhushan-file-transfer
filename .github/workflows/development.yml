@@ -39,7 +39,7 @@ jobs:
         run: |
           cdk synth FileTransferStack 
           cdk bootstrap --force
-          cdk deploy FileTransferStack --require-approval never
+          cdk deploy FileTransferStack 
           cdk synth FileTransferCmkSecretS3Stack 
           cdk bootstrap --force
-          cdk deploy FileTransferCmkSecretS3Stack --require-approval never
+          cdk deploy FileTransferCmkSecretS3Stack 
