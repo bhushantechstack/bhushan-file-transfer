@@ -67,7 +67,7 @@ export class FileTransferStack extends cdk.Stack {
       functionName:fileConfig.lambda.functionName,
       runtime: cdk.aws_lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
-      code: cdk.aws_lambda.Code.fromAsset(path.join("s3://"+fileConfig.bucket.essentialBucket+this.envVariable+"/lambda-scripts")),
+      code: cdk.aws_lambda.Code.fromAsset("s3://"+fileConfig.bucket.essentialBucket+this.envVariable+"/lambda-scripts"),
     });
 
   }
