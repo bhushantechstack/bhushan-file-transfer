@@ -35,7 +35,7 @@ export class FileTransferStack extends cdk.Stack {
       fileConfig.glue.jobName + this.envVariable,
       {
         command: {
-          name: fileConfig.glue.jobName + this.envVariable,
+          name: "glueetl",
           pythonVersion: "3.9",
           scriptLocation: "../utils/glue-script/lambda-script.py",
         },
