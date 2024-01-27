@@ -10,7 +10,7 @@ export class FileTransferStack extends cdk.Stack {
     super(scope, id, props);
     this.envVariable = "dev";
     //essential bucket
-    const essentialBucket = new cdk.aws_s3.Bucket(
+    const veryInputBucket = new cdk.aws_s3.Bucket(
       this,
       fileConfig.bucket.essentialBucket + this.envVariable,
       {
@@ -23,12 +23,12 @@ export class FileTransferStack extends cdk.Stack {
     
     new cdk.aws_s3_deployment.BucketDeployment(this, 'GlueScriptDeployment', {
       sources: [cdk.aws_s3_deployment.Source.asset("utils/glue-script/")],
-      destinationBucket: essentialBucket,
+      destinationBucket: veryInputBucket,
       destinationKeyPrefix: 'scripts', // Destination folder in the S3 bucket
     });
 
     // data bucket
-    const dataBucket = new cdk.aws_s3.Bucket(
+    const veryOutputBucket = new cdk.aws_s3.Bucket(
       this,
       fileConfig.bucket.dataBucket + this.envVariable,
       {
@@ -44,9 +44,9 @@ export class FileTransferStack extends cdk.Stack {
       {
         command: {
           name: "glueetl",
-          scriptLocation: `s3://${essentialBucket}/scripts/lambda-script.py`,
+          scriptLocation: "s3://"+fileConfig.bucket.essentialBucket+this.envVariable+"/scripts/lambda-script.py",
         },
-        role: essentialBucket.bucketArn,
+        role: veryInputBucket.bucketArn,
         description: fileConfig.glue.description,
         glueVersion: "4.0",
         numberOfWorkers: 299,
